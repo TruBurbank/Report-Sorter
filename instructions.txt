@@ -1,0 +1,23 @@
+Requirements:
+
+python >= 3.7
+
+pandas
+tabula-py
+pypdf2
+xlrd
+
+instructions:
+
+
+pip install -r requirements.txt
+
+run the above command in terminal in the same directory as requirements.txt
+
+csvmanip.py
+-it is used for seperating the intial scanned csv reports
+-multiple reports are supported
+
+pdfmanip.py
+
+-it is used to find the unscanned IPs and sort them
