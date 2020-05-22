@@ -16,10 +16,8 @@ print("\nMerging the reports into one")
     
 master = pd.read_excel(masterlist)
 
-
 for i in range(noReports):
     report = pd.concat([pd.read_csv(reportlist[j]) for j in range(noReports)]) #the loop converts the report(s) into one single file
-
 
 masterColumn = master.columns.values.tolist() #Retrives the headers of the master list
 
@@ -31,7 +29,6 @@ if os.path.isdir(path):
     print('\nDirectory Already created')
 else:
     os.mkdir(path, mode = 0o777) #Makes a directory to store the seperated reports
-
 
 print("\nSearching for IP addresses for all Columns\n ")
 for i in range(len(masterColumn)):
