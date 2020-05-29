@@ -28,12 +28,10 @@ master = pd.read_excel(masterlist)
 
 master.applymap(lambda x: x.strip() if isinstance(x, str) else x) #strips the IPs of their spaces(only right spaces for now)
 
-masterColumn = master.columns.values.tolist() #Retrives the headers of the master list
+masterColumn = master.columns.values.tolist() #Retrieves the headers of the master list
 
 finalColumns = []
 convDF = []
-# revisedMasterList = pd.read_csv('revisedMasterList.csv')
-
 # the loop fonds the columns corresponding with the IPs
 
 for i in range(len(masterColumn)):
@@ -43,14 +41,13 @@ for i in range(len(masterColumn)):
         print(masterColumn[i])
         finalColumns.append(masterColumn[i]) 
         
-        
 for j in range(len(finalColumns)):
     convDF.append(master[finalColumns[j]])
 convDF = pd.DataFrame(convDF)
 convDF1 = pd.DataFrame(convDF).stack()
 
 print('\nSearching for Unscanned IP Addresses...')
-IPdf = convDF1[~convDF1.isin(pdfReport['Node'])] #retrives the unscanned IPs
+IPdf = convDF1[~convDF1.isin(pdfReport['Node'])] #retrieves the unscanned IPs
 columnGroup= []
 initialScanStatus = []
 
@@ -75,7 +72,5 @@ print('\nCreating file')
 
 resultFile = 'Scan_Status_Report ' + os.path.splitext(pdflist)[0].replace('PDF', '') + '.csv'
 
-hdr = False if os.path.exists(resultFile) else True
-
-finalReport.to_csv(resultFile, index=False, header=hdr, mode='a')
-os.remove('test.csv')
+finalReport.to_csv(resultFile, index=False, header=True)
+# os.remove('test.csv')
