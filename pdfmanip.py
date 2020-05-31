@@ -5,7 +5,7 @@ from pageFinder import pageFinder as pf
 
 pdflist = input('Enter PDF : ')
 masterlist = input('\nEnter Master list : ')
-dirName = input('\nPlease enter a dir name : ')
+
 pdfname = pf(pdflist)
 initPDF = pdfname.getPDf()
 tPages = pdfname.getpdfpages(object= initPDF)
@@ -62,7 +62,7 @@ for i in range(len(convDF1)):
         initialScanStatus.append('Unscanned')
     else:
         initialScanStatus.append('Scanned')
-
+dirName = input('\nPlease enter a dir name : ')
 path = os.path.join(os.getcwd(), dirName)
 
 if os.path.isdir(path):
@@ -80,4 +80,4 @@ print('\nCreating file')
 resultFile = 'Scan_Status_Report ' + os.path.splitext(pdflist)[0].replace('PDF', '') + '.csv'
 
 finalReport.to_csv(os.path.join(path, resultFile), index=False, header=True)
-# os.remove('test.csv')
+os.remove('test.csv')
