@@ -5,6 +5,7 @@ from pageFinder import pageFinder as pf
 
 pdflist = input('Enter PDF : ')
 masterlist = input('\nEnter Master list : ')
+dirName = input('\nPlease enter a dir name : ')
 pdfname = pf(pdflist)
 initPDF = pdfname.getPDf()
 tPages = pdfname.getpdfpages(object= initPDF)
@@ -36,7 +37,6 @@ convDF = []
 
 for i in range(len(masterColumn)):
     result = pdfReport[pdfReport['Node'].isin(master[masterColumn[i]])]
-    print(result.empty)
     if result.empty != True:
         print(masterColumn[i])
         finalColumns.append(masterColumn[i]) 
@@ -63,6 +63,13 @@ for i in range(len(convDF1)):
     else:
         initialScanStatus.append('Scanned')
 
+path = os.path.join(os.getcwd(), dirName)
+
+if os.path.isdir(path):
+    print('\nDirectory Already created')
+else:
+    os.mkdir(path, mode = 0o777) #Makes a directory to store the seperated reports
+
 #concats the created dataframes into one singel dataframe
 finalReport = pd.concat([s.reset_index(drop=True)for s in [convDF1, pd.DataFrame(columnGroup),pd.DataFrame(initialScanStatus)]], axis=1)
 
@@ -72,5 +79,5 @@ print('\nCreating file')
 
 resultFile = 'Scan_Status_Report ' + os.path.splitext(pdflist)[0].replace('PDF', '') + '.csv'
 
-finalReport.to_csv(resultFile, index=False, header=True)
+finalReport.to_csv(os.path.join(path, resultFile), index=False, header=True)
 # os.remove('test.csv')
