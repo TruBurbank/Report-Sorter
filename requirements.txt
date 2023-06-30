@@ -1,4 +1,4 @@
-PyPDF2==1.27.5
+PyPDF2==1.27.9
 pandas==1.0.3
 tabula-py==2.1.0
 xlrd==1.2.0
